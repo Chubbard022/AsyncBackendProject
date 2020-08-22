@@ -1,3 +1,5 @@
+const express = require("express")
+
 //setting up server
 const server = express();
 server.use(express.json())

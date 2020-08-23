@@ -1,4 +1,3 @@
-
 exports.up = function(knex) {
   return knex.schema
     .createTable("list",itm=>{
@@ -16,10 +15,22 @@ exports.up = function(knex) {
             .onDelete("RESTRICT")
             .onUpdate("CASCADE")
     })
+    .createTable("priority", itm=>{
+        itm.increments("id")
+        itm.string("priority")
+        itm.string("deadline")
+        itm.integer("itm_id")//FK to item table
+          .unsigned()
+          .references("id")
+          .inTable("item")
+          .onDelete("RESTRICT")
+          .onUpdate("CASCADE")
+    })
 };
 
 exports.down = function(knex) {
   return knex.schema
+    .dropTableIfExists("priority")
     .dropTableIfExists("item")
     .dropTableIfExists("list")
 };

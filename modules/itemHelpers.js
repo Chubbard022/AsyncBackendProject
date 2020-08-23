@@ -2,7 +2,7 @@ const knex = require("knex")
 const knexConfig = require("../knexfile")
 const db = knex(knexConfig.development)
 
-module.export = {
+module.exports = {
     add,
     find,
     findById,
@@ -15,19 +15,18 @@ module.export = {
 async function add(item){   
     const [id] = await db("item")
         .insert(item)
-        .returning("id")
 
-    return findById(id);
+    return await findById(id);
 }
 
-function find(){
-    return db("item");
+async function find(){
+    return await db("item");
 }
 
 async function findById(id){
-   return  db("item")
-        .where({id})
-        .first()
+   return await db("item")
+                .where({id})
+                .first()
 }
 
 function findByName(name){
@@ -46,7 +45,7 @@ async function update(id,item){
         return await findById(id);
 }
 async function remove(id){
-    db('item')
-        .where({id})
-        .del()
+    return await db('item')
+                .where({id})
+                .del()
 }

@@ -6,7 +6,7 @@ router.get("/", async (req,res)=>{
     try{
         let itemList = await itemHelpers.find();
         res.status(200).json(itemList)
-    }catch(errors){
+    }catch(error){
         res.status(500).json({
             errorMessage:
             "Sorry but something went wrong while retrieving all items"
@@ -54,7 +54,7 @@ router.get("/:completed", async (req,res)=>{
         let itemCompletion = req.params.completed;
         let findItemsCompleted = itemHelpers.findByCompleted(itemCompletion);
 
-        res.status(200).json(findByCompleted)
+        res.status(200).json(findItemsCompleted)
     }
     catch(error){
         res.status(500).json({
@@ -71,7 +71,7 @@ router.post("/newItem", async (req,res)=>{
         let newItem = req.body;
         let addItem = await itemHelpers.add(newItem)
 
-        res.status(201).json({
+        res.status(200).json({
             successMessage: "Successfully created new item",
             addItem
         })

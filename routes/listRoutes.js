@@ -19,7 +19,7 @@ router.get("/", async(req,res)=>{
     }
 })
 
-//getting a secific list based off its id
+//getting a secific list based off it id
 router.get("/:id", async (req,res)=>{
     try{
         let listId = req.params.id;
@@ -27,7 +27,7 @@ router.get("/:id", async (req,res)=>{
 
         res.status(201).json(findListById)
     }catch(error){
-        res.satatus(401).json({
+        res.status(401).json({
             errorMessage: "Sorry but something went wrong while retrieving lists"
         })
 
@@ -44,9 +44,24 @@ router.get("/:name",async(req,res)=>{
         res.status(200).json(findListByName)
     }catch(error){
         res.status(401).json({
-            errorMessage: "Sorry but something went wrong while retrieving lists"
         })
 
+        throw new Error(error)
+    }
+})
+
+//getting all items within a list
+router.get("/itemsinlist/:id", async(req,res)=>{
+    try{
+        let listId = req.params.id;
+        let itemsInList = await listHelpers.findAllItemsInList(listId);
+
+        res.status(200).json(itemsInList)
+
+    }catch(error){
+        res.status(500).json({
+            errorMessage: "Sorry but something went wrong while retrieving items in list"
+        })
         throw new Error(error)
     }
 })

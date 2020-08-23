@@ -8,7 +8,7 @@ const server = express();
 server.use(express.json())
 
 server.use("/api/list",listRoutes)
-server.use("/api/items",itemRoutes)
+server.use("/api/item",itemRoutes)
 
 server.use("/",(req,res)=>{
     res.status(200).json("server working")

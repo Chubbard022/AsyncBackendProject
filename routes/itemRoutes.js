@@ -19,7 +19,7 @@ router.get("/", async (req,res)=>{
 router.get("/:id", async (req,res)=>{
     try{
         let itemId = req.params.id;
-        let findItemById = itemHelpers.findById(itemId);
+        let findItemById = await itemHelpers.findById(itemId);
 
         res.status(201).json(findItemById)
     }catch(error){
@@ -35,7 +35,7 @@ router.get("/:id", async (req,res)=>{
 router.get("/:name", async (req,res)=>{
     try{
         let itemName = req.params.name;
-        let findItemByName = itemHelpers.findByName(itemName);
+        let findItemByName = await itemHelpers.findByName(itemName);
 
         res.status(201).json(findItemByName)
     }
@@ -52,11 +52,26 @@ router.get("/:name", async (req,res)=>{
 router.get("/:completed", async (req,res)=>{
     try{
         let itemCompletion = req.params.completed;
-        let findItemsCompleted = itemHelpers.findByCompleted(itemCompletion);
+        let findItemsCompleted = await itemHelpers.findByCompleted(itemCompletion);
 
         res.status(200).json(findItemsCompleted)
     }
     catch(error){
+        res.status(500).json({
+            errorMessage:
+            "Sorry but something went wrong while retrieving an item"
+        })
+        throw new Error(error)
+    }
+})
+//get priority for item given id passed in
+router.get("/priorityinitem/:id", async (req,res) =>{
+    try{
+        let itemId = req.params.id;
+        let priorityItem = await itemHelpers.findAllPriorityInItem(itemId);
+
+        res.status(200).json(priorityItem);
+    }catch(error){
         res.status(500).json({
             errorMessage:
             "Sorry but something went wrong while retrieving an item"
@@ -90,7 +105,7 @@ router.put("/:id", async (req,res)=>{
     try{
         let itemId = req.params.id;
         let itemToUpdate = req.body;
-        let updateItem = itemHelpers.update(itemId,itemToUpdate)
+        let updateItem = await itemHelpers.update(itemId,itemToUpdate)
 
         res.status(203).json({
             successMessage: "Successfully updated item",
@@ -111,7 +126,7 @@ router.put("/:id", async (req,res)=>{
 router.delete("/:id", async (req,res)=>{
     try{
         let itemId = req.params.id;
-        let delteItem = itemHelpers.remove(itemId);
+        let delteItem = await itemHelpers.remove(itemId);
 
         res.status(200).json({
             successMessage: "Successfully deleted an item",

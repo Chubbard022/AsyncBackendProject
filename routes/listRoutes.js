@@ -36,16 +36,16 @@ router.get("/:id", async (req,res)=>{
 })
 
 //getting a specific list by name
-router.get("/:name",async(req,res)=>{
+router.get("/name/:name", async (req,res)=>{
     try{
-        let listName = req.params.id;
-        let findListByName = await listHelpers.findByName(listName);
+        let listName = req.params.name;
+        let findListById = await listHelpers.findByName(listName)
 
-        res.status(200).json(findListByName)
+        res.status(200).json(findListById)
     }catch(error){
         res.status(401).json({
+            errorMessage: "Sorry but something went wrong while retrieving lists"
         })
-
         throw new Error(error)
     }
 })

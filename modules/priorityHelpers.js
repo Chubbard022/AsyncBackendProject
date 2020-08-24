@@ -29,11 +29,15 @@ async function findbyId(id){
 
 }
 
-function findByPriority(){
-    //find all items within list, return in descending order their priority
+function findByPriority(priorty){
+    return await db("priority")
+                    .where({priorty})
+                    .first()
 }
-function findByDate(){
-    //find all items within list, return in descending order their deadline
+function findByDate(deadline){
+    return await db("priority")
+                    .where({deadline})
+                    .first()
 }
 function update(id,updatedPriority){
     await db("priority")

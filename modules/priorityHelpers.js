@@ -2,7 +2,7 @@ const knex = require("knex")
 const knexConfig = require("../knexfile")
 const db = knex(knexConfig.development)
 
-module.export = {
+module.exports = {
     add,
     find,
     findbyId,
@@ -29,22 +29,20 @@ async function findbyId(id){
 
 }
 
-function findByPriority(priorty){
+async function findByPriority(priority){
     return await db("priority")
-                    .where({priorty})
-                    .first()
+                    .where({priority})
 }
-function findByDate(deadline){
+async function findByDate(deadline){
     return await db("priority")
                     .where({deadline})
-                    .first()
 }
-function update(id,updatedPriority){
-    await db("priority")
+async function update(id,updatedPriority){
+    return await db("priority")
         .where({id})
         .update(updatedPriority)
 }
-function remove(id){
+async function remove(id){
     return db("priority")
         .where({id})
         .del()

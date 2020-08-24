@@ -1,5 +1,5 @@
-# AsyncBackendProject
-Creating an async backend for an example of backend knowledge
+# Async_Todo_Backend_Project
+Creating Async_Todo_Backend_Project for an example of backend knowledge
 
 ## start project
 * download all dependencies for project using yarn or npm.

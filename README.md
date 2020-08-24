@@ -15,7 +15,7 @@ Creating an async backend for an example of backend knowledge
     * get list of items within list, given passed in id --> __/api/list/itemsinlist/:id__
     * add new list to database --> __/api/list/newlist__
     * update list given passed in id --> __/api/list/:id__
-    * delete list given passed in id --> __/api/list.id__
+    * delete list given passed in id --> __/api/list/:id__
 * Item Route
     * get all items created -->__/api/item__
     * get item by id passed in --> __/api/item/:id__

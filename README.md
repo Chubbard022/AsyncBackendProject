@@ -20,7 +20,7 @@ Creating Async_Todo_Backend_Project for an example of backend knowledge
     * get all items created -->__/api/item__
     * get item by id passed in --> __/api/item/:id__
     * get item by name passed in --> __/api/item/name/:name__
-    * get items that are completion value passed in __/api/item/completed:completed__
+    * get items that are completion value passed in __/api/item/completed/:completed__
     * get priority of an item given id passed in __/api/item/priorityinitem/:id__
     * add new item to database --> __/api/item/newItem__
     * update item given id passed in --> __/api/item/:id__

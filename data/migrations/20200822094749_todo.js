@@ -19,7 +19,7 @@ exports.up = function(knex) {
         itm.increments("id")
         itm.string("priority")
         itm.string("deadline")
-        itm.integer("itm_id")//FK to item table
+        itm.integer("item_id")//FK to item table
           .unsigned()
           .references("id")
           .inTable("item")

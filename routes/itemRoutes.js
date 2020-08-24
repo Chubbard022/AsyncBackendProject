@@ -21,7 +21,7 @@ router.get("/:id", async (req,res)=>{
         let itemId = req.params.id;
         let findItemById = await itemHelpers.findById(itemId);
 
-        res.status(201).json(findItemById)
+        res.status(200).json(findItemById)
     }catch(error){
         res.status(500).json({
             errorMessage:
@@ -32,12 +32,13 @@ router.get("/:id", async (req,res)=>{
 })
 
 // get item by its name
-router.get("/:name", async (req,res)=>{
+router.get("/name/:name", async (req,res)=>{
     try{
         let itemName = req.params.name;
+        console.log(itemName)
         let findItemByName = await itemHelpers.findByName(itemName);
 
-        res.status(201).json(findItemByName)
+        res.status(200).json(findItemByName)
     }
     catch(error){
         res.status(500).json({
@@ -49,7 +50,7 @@ router.get("/:name", async (req,res)=>{
 })
 
 //get list of items that have been completed
-router.get("/:completed", async (req,res)=>{
+router.get("/completed/:completed", async (req,res)=>{
     try{
         let itemCompletion = req.params.completed;
         let findItemsCompleted = await itemHelpers.findByCompleted(itemCompletion);
@@ -86,7 +87,7 @@ router.post("/newItem", async (req,res)=>{
         let newItem = req.body;
         let addItem = await itemHelpers.add(newItem)
 
-        res.status(200).json({
+        res.status(201).json({
             successMessage: "Successfully created new item",
             addItem
         })
@@ -107,7 +108,7 @@ router.put("/:id", async (req,res)=>{
         let itemToUpdate = req.body;
         let updateItem = await itemHelpers.update(itemId,itemToUpdate)
 
-        res.status(203).json({
+        res.status(200).json({
             successMessage: "Successfully updated item",
             updateItem
         })

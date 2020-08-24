@@ -6,9 +6,8 @@ const listHelpers = require("../modules/listHelpers")
 router.get("/", async(req,res)=>{
     try {
         const list = await listHelpers.find();
-        const message = "The users were found in the database.";
 
-        res.status(200).json({ message, list });
+        res.status(200).json(list);
     } catch (error) {
         res.status(500).json({
             errorMessage:
@@ -25,7 +24,7 @@ router.get("/:id", async (req,res)=>{
         let listId = req.params.id;
         let findListById = await listHelpers.findById(listId)
 
-        res.status(201).json(findListById)
+        res.status(200).json(findListById)
     }catch(error){
         res.status(401).json({
             errorMessage: "Sorry but something went wrong while retrieving lists"
@@ -36,16 +35,16 @@ router.get("/:id", async (req,res)=>{
 })
 
 //getting a specific list by name
-router.get("/:name",async(req,res)=>{
+router.get("/name/:name", async (req,res)=>{
     try{
-        let listName = req.params.id;
-        let findListByName = await listHelpers.findByName(listName);
+        let listName = req.params.name;
+        let findListById = await listHelpers.findByName(listName)
 
-        res.status(200).json(findListByName)
+        res.status(200).json(findListById)
     }catch(error){
-        res.status(401).json({
+        res.status(500).json({
+            errorMessage: "Sorry but something went wrong while retrieving lists"
         })
-
         throw new Error(error)
     }
 })
@@ -71,9 +70,8 @@ router.post("/newlist", async(req,res)=>{
     try {
         let newItem = req.body;
         let addItem = await listHelpers.add(newItem);
-        const message = "new list was added to the database.";
         
-        res.status(200).json({ message, addItem });
+        res.status(201).json(addItem);
     }catch (error) {
         res.status(500).json({
             errorMessage:
@@ -91,11 +89,7 @@ router.put("/:id", async (req,res)=>{
         let listToUpdate = req.body;
         let updateList = await listHelpers.update(listId,listToUpdate)
 
-        res.status(203).json({
-            successMessage:
-            "successfully updated list",
-            updateList
-        })
+        res.status(200).json(updateList)
     }
     catch(error){
         res.status(500).json({
@@ -112,8 +106,7 @@ router.delete("/:id", async (req,res)=>{
     try {
         let item = req.params.id;
         let deleteItem = await listHelpers.remove(item);
-        const message = `list was deleted to the database.`;
-        res.status(200).json({ message, deleteItem });
+        res.status(200).json(deleteItem);
     } catch (error) {
         res.status(500).json({
             errorMessage:

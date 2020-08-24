@@ -23,7 +23,7 @@ router.get("/", async(req,res)=>{
 router.get("/:id", async (req,res)=>{
     try{
         let listId = req.params.id;
-        let findListById = listHelpers.findById(listId)
+        let findListById = await listHelpers.findById(listId)
 
         res.status(201).json(findListById)
     }catch(error){
@@ -39,7 +39,7 @@ router.get("/:id", async (req,res)=>{
 router.get("/:name",async(req,res)=>{
     try{
         let listName = req.params.id;
-        let findListByName = listHelpers.findByName(listName);
+        let findListByName = await listHelpers.findByName(listName);
 
         res.status(200).json(findListByName)
     }catch(error){
@@ -89,7 +89,7 @@ router.put("/:id", async (req,res)=>{
     try{
         let listId = req.params.id;
         let listToUpdate = req.body;
-        let updateList = listHelpers.update(listId,listToUpdate)
+        let updateList = await listHelpers.update(listId,listToUpdate)
 
         res.status(203).json({
             successMessage:

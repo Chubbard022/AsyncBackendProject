@@ -29,7 +29,7 @@ async function findById(id){
 
 // returning the instance where the passed in name matches in the dataBase
 async function findByName(name){
-    return await db("list").where({name})
+    return await db("list").where({"name":name})
 }
 async function findAllItemsInList(listId){
     let filteritemsInList = await db("item")

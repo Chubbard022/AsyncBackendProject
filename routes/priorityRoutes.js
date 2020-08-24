@@ -31,7 +31,7 @@ router.get("/:id", async (req,res)=>{
 })
 
 //returns a list of priorities based on passed in priority
-router.get("/:priority", async (req,res)=>{
+router.get("/prioritylevel/:priority", async (req,res)=>{
     try{
         let getPriority = req.params.priority;
         let findByPriority = await priorityHelpers.findByPriority(getPriority);
@@ -46,7 +46,7 @@ router.get("/:priority", async (req,res)=>{
 })
 
 //returns a list of priorities based on deadline passed in
-router.get("/:deadline", async (req,res)=>{
+router.get("/deadline/:deadline", async (req,res)=>{
     try{
         let getDeadline = req.params.deadline;
         let findPriorityByDeadline = await priorityHelpers.findByDate(getDeadline);
@@ -105,3 +105,5 @@ router.delete("/:id", async (req,res)=>{
         throw new Error(error)
     }
 })
+
+module.exports = router;

@@ -32,9 +32,10 @@ router.get("/:id", async (req,res)=>{
 })
 
 // get item by its name
-router.get("/:name", async (req,res)=>{
+router.get("/name/:name", async (req,res)=>{
     try{
         let itemName = req.params.name;
+        console.log(itemName)
         let findItemByName = await itemHelpers.findByName(itemName);
 
         res.status(201).json(findItemByName)
@@ -49,7 +50,7 @@ router.get("/:name", async (req,res)=>{
 })
 
 //get list of items that have been completed
-router.get("/:completed", async (req,res)=>{
+router.get("/completed/:completed", async (req,res)=>{
     try{
         let itemCompletion = req.params.completed;
         let findItemsCompleted = await itemHelpers.findByCompleted(itemCompletion);

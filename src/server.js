@@ -8,10 +8,12 @@ const priorityRoutes = require("../routes/priorityRoutes")
 const server = express();
 server.use(express.json())
 
+//all routes used in Async Todo project
 server.use("/api/list",listRoutes);
 server.use("/api/item",itemRoutes);
 server.use("/api/priority",priorityRoutes);
 
+//base endpoint to make sure server working
 server.use("/",(req,res)=>{
     res.status(200).json("server working")
 })

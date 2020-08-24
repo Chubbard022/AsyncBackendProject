@@ -21,7 +21,7 @@ router.get("/:id", async (req,res)=>{
         let itemId = req.params.id;
         let findItemById = await itemHelpers.findById(itemId);
 
-        res.status(201).json(findItemById)
+        res.status(200).json(findItemById)
     }catch(error){
         res.status(500).json({
             errorMessage:
@@ -38,7 +38,7 @@ router.get("/name/:name", async (req,res)=>{
         console.log(itemName)
         let findItemByName = await itemHelpers.findByName(itemName);
 
-        res.status(201).json(findItemByName)
+        res.status(200).json(findItemByName)
     }
     catch(error){
         res.status(500).json({
@@ -87,7 +87,7 @@ router.post("/newItem", async (req,res)=>{
         let newItem = req.body;
         let addItem = await itemHelpers.add(newItem)
 
-        res.status(200).json({
+        res.status(201).json({
             successMessage: "Successfully created new item",
             addItem
         })
@@ -108,7 +108,7 @@ router.put("/:id", async (req,res)=>{
         let itemToUpdate = req.body;
         let updateItem = await itemHelpers.update(itemId,itemToUpdate)
 
-        res.status(203).json({
+        res.status(200).json({
             successMessage: "Successfully updated item",
             updateItem
         })

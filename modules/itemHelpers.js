@@ -29,6 +29,7 @@ async function findById(id){
                 .where({id})
                 .first()
 }
+
 async function findAllPriorityInItem(itemId){
     let filterPriorityInItem = await db("priority")
                                     .join("item","item.id", "=", "priority.item_id")
@@ -40,7 +41,16 @@ async function findByName(name){
 }
 
 async function findByCompleted(completed){
-    return await db("item").where(completed)
+    if(completed === "true"){
+        completed = 1;
+        return await db("item").where({completed})
+    }
+    else if(completed === "false"){
+        completed = 0;
+        return await db("item").where({completed})
+    }else{
+        return await db("item").where({completed})
+    }
 }
 
 
